@@ -1,0 +1,163 @@
+﻿@model eApoteka.Models.ViewModels.PlaceOrderViewModel
+
+
+@{
+    ViewData["Title"] = "PlaceOrderView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .order-section {
+            text-align: center;
+            padding: 50px 0;
+            color: #659934;
+            font-weight: bold;
+            font-size: 3em;
+        }
+
+            .order-section h2 {
+                margin-bottom: 30px;
+                font-weight: 300;
+            }
+
+        .order-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+            .order-form input,
+            .order-form textarea {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 20px;
+                border: 1px solid #659934;
+                border-radius: 5px;
+                resize: none;
+            }
+
+            .order-form select {
+                width: 100%;
+                margin-bottom: 20px;
+                padding-top: 7px;
+                border: 1px solid #659934;
+                border-radius: 5px;
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg"><polyline points="10,40 70,100 130,40" stroke="black" stroke-width="20" fill="none" /></svg>') no-repeat right 10px center;
+                background-size: 10px;
+                text-align-last: left;
+                padding-right: 30px;
+                color: #495057;
+            }
+
+                .order-form select option:disabled {
+                    color: #6c757d;
+                }
+
+                .order-form input:focus,
+                .order-form select:focus,
+                .order-form textarea:focus {
+                    outline: 1px solid #659934;
+                    box-shadow: none !important;
+                    border: 2px solid #659934 !important
+                }
+
+            .order-form button {
+                background-color: #659934;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 10px;
+            }
+
+                .order-form button:hover {
+                    background-color: rgba(101, 153, 52, 0.8);
+                    border-color: rgba(101, 153, 52, 0.8);
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+    <div class="container order-section">
+        <h2>Place your order</h2>
+        <form class="order-form">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="First Name*" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Last Name*" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Payment method</option>
+                        <option value="Card">Card</option>
+                        <option value="Cash on delivery">Cash on delivery</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Delivery options</option>
+                        <option value="In-person">In-person</option>
+                        <option value="Delivery">Delivery</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Street" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="No." required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="City" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Postal" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="email" class="form-control" placeholder="E-Mail*" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" placeholder="Phone*" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" rows="4" placeholder="Type your message here*" required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Place order</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

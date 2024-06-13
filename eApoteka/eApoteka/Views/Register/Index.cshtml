@@ -1,0 +1,190 @@
+﻿@model eApoteka.Models.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "RegisterView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        #register .container #register-row #register-column #register-box {
+            margin-top: 100px;
+            max-width: 600px;
+            padding: 40px;
+            border: 1px solid #659934;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 100px;
+        }
+
+            #register .container #register-row #register-column #register-box #register-form {
+                padding: 20px;
+            }
+
+        .text-info {
+            color: #659934 !important;
+        }
+
+        .btn-info {
+            background-color: #659934;
+            border-color: #659934;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+
+            .btn-info:hover {
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
+
+        .form-group {
+            margin-top: 10px;
+        }
+
+        #register .container #register-row #register-column #register-box #register-form #remember-me {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #register .container #register-row #register-column #register-box #register-form #register-link {
+            margin-top: 0;
+        }
+
+        .big-logo {
+            height: 225px;
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input:focus, textarea:focus, select:focus, .form-control:focus {
+            outline: 1px solid #659934;
+            box-shadow: none !important;
+            border: 2px solid #659934 !important
+        }
+
+        .form-control {
+            outline: 1px solid #659934;
+        }
+
+
+        .under-form {
+            display: flex;
+            align-items: center;
+        }
+
+            .under-form label {
+                margin-right: 10px;
+            }
+
+        .btn-info {
+            background-color: #659934;
+            border-color: #659934;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 75px;
+            color: white;
+        }
+
+            .btn-info:hover {
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
+
+        .register-link a {
+            color: #659934;
+            text-decoration: none;
+        }
+
+            .register-link a:hover {
+                text-decoration: underline;
+                color: #567d2a;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="register">
+        <div class="container">
+            <div id="register-row" class="row justify-content-center align-items-center">
+                <div id="register-column" class="col-md-6">
+                    <div id="register-box" class="col-md-12">
+                        <form id="register-form" class="form" action="" method="post">
+                            <div class="image">
+                                <img src="~/Images/logo-reverse.png" alt="eApoteka logo" class="big-logo" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Name" class="text-info">Name:</label><br>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="Surname" class="text-info">Surname:</label><br>
+                                <input type="text" name="name" id="surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone number" class="text-info"> Phone number:</label><br>
+                                <input type="text" name="phone number" id="phoneNumber" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="Adress" class="text-info">Adress:</label><br>
+                                <input type="text" name="adress" id="adress" class="form-control">
+                            </div>
+                            <div class="form-group" id="remember-me">
+                                <div class="under-form">
+                                    <label for="remember-me" class="text-info">Remember me</label>
+                                    <input id="remember-me" name="remember-me" type="checkbox">
+                                </div>
+                                <div id="register-link" class="register-link">
+                                    <a href="#" class="text-info">Login here</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Register">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

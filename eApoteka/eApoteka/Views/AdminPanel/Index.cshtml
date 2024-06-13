@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = "AdminPanelView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            margin-bottom: 50px;
+            font-weight: bold;
+            color: #659934;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: bold;
+            color: #659934;
+        }
+
+        .card-container {
+            padding: 15px;
+            border: 1px solid #659934;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
+
+        .card {
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            background-color: #659934;
+            color: white;
+            border-radius: 10px;
+            position: relative;
+        }
+
+            .card-body .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                color: white;
+            }
+
+        .admin-button {
+            width: 100%;
+            height: 78px;
+            background-color: #659934;
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        button:hover {
+            background-color: rgba(101, 153, 52, 0.8);
+            border-color: rgba(101, 153, 52, 0.8);
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="page-title">Welcome back Admin!</h2>
+        <div class="row">
+            <div class="col card-container">
+                <h3 class="section-title">User</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col card-container">
+                <h3 class="section-title">Pharmacist</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col card-container">
+                <h3 class="section-title">Delivery person</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p> ID MM123 </p>
+                        <p> Meho Mehic </p>
+                        <button type="button" class="close">&times;</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col card-container">
+                <h3 class="section-title">Administration</h3>
+                <button class="btn admin-button">Payment</button>
+                <button class="btn admin-button">Delivery</button>
+                <button class="btn admin-button">Product</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

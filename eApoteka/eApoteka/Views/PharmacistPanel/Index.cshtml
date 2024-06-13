@@ -1,0 +1,141 @@
+﻿@model eApoteka.Models.Upit
+
+@{
+    ViewData["Title"] = "PharmacistPanelView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket and Answer Panel</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        <style >
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .container {
+            margin-bottom: 100px;
+        }
+
+        .page-title {
+            margin-top: 1.5em;
+            align-content: center;
+            text-align: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #659934;
+            font-size: 2.5em
+        }
+
+        .panel {
+            border: 2px solid #659934;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            height: 245px;
+        }
+
+        .panel-title {
+            font-weight: bold;
+            color: #659934;
+            margin-bottom: 10px;
+            font-size: 1.7em;
+        }
+
+        .answer-panel {
+            width: 700px;
+            height: 170px;
+            border: none;
+            resize: none;
+        }
+
+        .panel textarea:focus {
+            outline: none;
+            border: none;
+        }
+
+        .btn-group-vertical {
+            border: 1px solid #659934;
+            height: 500px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .btn-custom2 {
+            border: 1px solid #659934 !important;
+            margin-bottom: 10px;
+            background-color: #659934;
+            color: white;
+            font-size: 20px;
+        }
+
+        .btn-custom {
+            background-color: #659934;
+            color: white;
+            margin-top: 10px;
+        }
+
+            .btn-custom:hover {
+                background-color: #4e7a29;
+            }
+
+        .btn-block {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        button:hover {
+            background-color: rgba(101, 153, 52, 0.8) !important;
+            border-color: rgba(101, 153, 52, 0.8) !important;
+            color: white !important;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="page-title">Welcome back!</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="btn-group-vertical w-100">
+                    <button class="btn btn-custom2">Ticket ID AC225<br>Adnan Corovic</button>
+                    <button class="btn btn-custom2">Ticket ID NB883<br>Nedim Becic</button>
+                    <button class="btn btn-custom2">Ticket ID RO456<br>Rijad Okeric</button>
+                    <button class="btn btn-custom2">Ticket ID ID000<br>Dzeljan Imadzinieri</button>
+                </div>
+                <div class="mt-3">
+                    <button class="btn btn-custom btn-block">Product Panel</button>
+                    <button class="btn btn-custom btn-block">Order Panel</button>
+                </div>
+            </div>
+            <div class="col-md-8 right-container">
+                <div class="panel">
+                    <div class="panel-title">Ticket</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">Answer</div>
+                    <textarea placeholder="Enter your answer here..." class="answer-panel"></textarea>
+                </div>
+                <button class="btn btn-custom float-right">Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

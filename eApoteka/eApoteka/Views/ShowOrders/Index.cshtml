@@ -1,0 +1,144 @@
+﻿@model eApoteka.Models.Narudzba
+
+
+@{
+    ViewData["Title"] = "ShowOrdersView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .my-4 {
+            margin-bottom: 2em !important;
+            color: #659934;
+            font-weight: bold;
+            font-size: 3em;
+        }
+
+        .order-card {
+            border: 1px solid #dcdcdc;
+            padding: 30px;
+            margin: 15px 0;
+            border-radius: 10px;
+            background-color: #fffff;
+            border: 2px solid;
+            border-color: #659934;
+        }
+
+        .order-date {
+            font-size: 26px !important;
+            text-align: center;
+            background-color: #fffff;
+            border: 1px solid;
+            border-color: #659934;
+            padding: 50px;
+            border-radius: 10px;
+        }
+
+        .order-content {
+            padding-top: 20px;
+            padding-left: 20px;
+        }
+
+            .order-content a {
+                color: #659934;
+            }
+
+            .order-content h5 {
+                color: #659934;
+                font-weight: bold;
+            }
+
+        .order-status-icon {
+            font-size: 24px;
+            color: #659934;
+            float: right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center my-4">Your Orders</h2>
+        <div class="order-card">
+            <div class="row">
+                <div class="col-2 order-date">
+                    <div>28</div>
+                    <div>JAN</div>
+                </div>
+                <div class="col-10 order-content">
+                    <h5>First Order</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
+                    <a href="#">Read more</a>
+                    <i class="order-status-icon">...</i>
+                </div>
+            </div>
+        </div>
+        <div class="order-card">
+            <div class="row">
+                <div class="col-2 order-date">
+                    <div>28</div>
+                    <div>JAN</div>
+                </div>
+                <div class="col-10 order-content">
+                    <h5>Second Order</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
+                    <a href="#">Read more</a>
+                    <!-- <i class="order-status-icon">&#128666;</i> -->
+                    <img src="~/Images/delivery-truck.png" alt="Truck Icon" class="order-status-icon" style="width: 48px; height: 48px; float: right;">
+                </div>
+            </div>
+        </div>
+        <div class="order-card">
+            <div class="row">
+                <div class="col-2 order-date">
+                    <div>28</div>
+                    <div>JAN</div>
+                </div>
+                <div class="col-10 order-content">
+                    <h5>Third Order</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
+                    <a href="#">Read more</a>
+                    <i class="order-status-icon">&#10004;</i>
+                </div>
+            </div>
+        </div>
+        <div class="order-card">
+            <div class="row">
+                <div class="col-2 order-date">
+                    <div>28</div>
+                    <div>JAN</div>
+                </div>
+                <div class="col-10 order-content">
+                    <h5>Fourth Order</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
+                    <a href="#">Read more</a>
+                    <i class="order-status-icon">&#10004;</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

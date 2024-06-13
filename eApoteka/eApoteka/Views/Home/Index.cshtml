@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ePharmacy</title>
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="stylesheet" href="~/Content/Index.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            flex: 1;
+            background-color: #fff;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+            .hero-content .big-logo {
+                height: 350px;
+                margin-top: 50px;
+            }
+
+            .hero-content p {
+                margin: 20px 0;
+            }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+            .buttons .btn-register,
+            .buttons .btn-login {
+                padding: 10px 20px;
+                background-color: #659934;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    </style>
+
+</head>
+<body>
+    <main role="main" class="pb-3">
+        <section class="hero">
+            <div class="hero-content">
+                <img src="~/Images/logo-reverse.png" alt="eApoteka logo" class="big-logo"/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor. Duis nec sem at orci commodo viverra id in.</p>
+                <div class="buttons">
+                    <button class="btn-register" onclick="location.href='@Url.Action("RegisterView", "Home")'"> Registracija </button>
+                    <button class="btn-login" onclick="location.href='@Url.Action("LoginView", "Home")'">Prijava</button>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,173 @@
+﻿@model eApoteka.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "LoginView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f9f9f9;
+        }
+
+        #login .container #login-row #login-column #login-box {
+            margin-top: 100px;
+            max-width: 600px;
+            padding: 40px;
+            border: 1px solid #659934;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 100px;
+        }
+
+            #login .container #login-row #login-column #login-box #login-form {
+                padding: 20px;
+            }
+
+        .text-info {
+            color: #659934 !important;
+        }
+
+        .btn-info {
+            background-color: #659934;
+            border-color: #659934;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 20px;
+        }
+
+            .btn-info:hover {
+                background-color: #567d2a;
+                border-color: #567d2a;
+            }
+
+        .form-group {
+            margin-top: 10px;
+        }
+
+        #login .container #login-row #login-column #login-box #login-form #remember-me {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+            margin-top: 0;
+        }
+
+        .big-logo {
+            height: 225px;
+        }
+
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        input:focus, textarea:focus, select:focus, .form-control:focus {
+            outline: 1px solid #659934;
+            box-shadow: none !important;
+            border: 2px solid #659934 !important
+        }
+
+        .form-control {
+            outline: 1px solid #659934;
+        }
+
+
+        .under-form {
+            display: flex;
+            align-items: center;
+        }
+
+            .under-form label {
+                margin-right: 10px;
+            }
+
+        .btn-info {
+            background-color: #659934;
+            border-color: #659934;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 75px;
+            color: white;
+        }
+
+            .btn-info:hover {
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
+
+        .register-link a {
+            color: #659934;
+            text-decoration: none;
+        }
+
+            .register-link a:hover {
+                text-decoration: underline;
+                color: #567d2a;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="login">
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <div class="image">
+                                <img src="~/Images/logo-reverse.png" alt="eApoteka logo" class="big-logo" />
+                            </div>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group" id="remember-me">
+                                <div class="under-form">
+                                    <label for="remember-me" class="text-info">Remember me</label>
+                                    <input id="remember-me" name="remember-me" type="checkbox">
+                                </div>
+                                <div id="register-link" class="register-link">
+                                    <a href="#" class="text-info">Register here</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Login">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

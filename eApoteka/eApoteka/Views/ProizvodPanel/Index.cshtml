@@ -1,0 +1,141 @@
+﻿@model eApoteka.Models.Proizvod
+
+@{
+    ViewData["Title"] = "ProductView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form View</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .page-title {
+            margin-bottom: 50px;
+            font-weight: bold;
+            color: #659934;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .form-container {
+            padding: 20px;
+            border: 1px solid #659934;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        .form-group label {
+            color: #659934;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #659934;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .form-control {
+            border: 1px solid #659934;
+            border-radius: 5px;
+        }
+
+            .form-control:focus {
+                border-color: #659934;
+                box-shadow: none;
+            }
+
+        .image-upload {
+            width: 100%;
+            height: 390px;
+            border: 1px solid #659934;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #659934;
+            cursor: pointer;
+            margin-top: 29px;
+        }
+
+        .btn-save, .btn-delete {
+            background-color: #659934;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            float: right;
+            width: 100px;
+        }
+
+        .btn-delete {
+            background-color: white;
+            color: #659934;
+            border: 1px solid #659934;
+        }
+
+        button:hover {
+            background-color: rgba(101, 153, 52, 0.8);
+            border-color: rgba(101, 153, 52, 0.8);
+            color: white !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row">
+            <h2 class="page-title">Product panel</h2>
+            <div class="col-md-6 container-left">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Name">
+                </div>
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <input type="text" class="form-control" id="composition" placeholder="Enter Type">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Product description:</label>
+                        <textarea rows="4" placeholder="Your Message" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="text" class="form-control" id="price" placeholder="Enter Price">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 align-items-center">
+                <div class="image-upload">
+                    <label for="upload-image" class="w-100 h-100 d-flex align-items-center justify-content-center">
+                        Image
+                        <input type="file" id="upload-image" class="d-none">
+                    </label>
+                </div>
+                <button class="btn btn-delete">Delete</button>
+                <button class="btn btn-save" style="margin-right: 10px">Save</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

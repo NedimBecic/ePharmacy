@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eApoteka</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #659934;
+            color: #fff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+            .logo img {
+                height: 40px;
+                margin-right: 10px;
+            }
+
+        .nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav li {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            font-size: 18px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        <!--.nav input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: -5px;
+        }-->
+
+        .container-personal {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            display: flex !important;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 20px 0px 20px;
+            background-color: #659934;
+            color: #fff;
+        }
+
+        .contact-info {
+            max-width: 45%;
+        }
+
+        .drustvene-mreze {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            max-width: 45%;
+        }
+
+            .drustvene-mreze h4 {
+                margin: 0;
+                margin-right: 10px;
+            }
+
+            .drustvene-mreze a {
+                display: inline-block;
+                margin-right: 10px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+        .drustvene-mreze-logo {
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="~/Images/logo-transparent.png" alt="eApoteka Logo">
+            <h1>eApoteka</h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Početna</a></li>
+                <li><a href="#">Tiketi</a></li>
+                <li><a href="#">Narudžbe</a></li>
+                <li><a href="#">Prijava</a></li>
+                <li><a href="#">Pretraga</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container-personal">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer>
+        <div class="contact-custom">
+            <h4>Kontaktirajte nas</h4>
+            <p>eApoteka@etf.unsa.ba</p>
+            <p>+1 800 425432</p>
+        </div>
+        <div class="drustvene-mreze">
+            <div class="footerText">
+                <h4>Zapratite nas</h4>
+            </div>
+            <div>
+                <a href="#" class="facebook"> <img src="~/Images/facebook.png" alt="Facebook Logo" class="drustvene-mreze-logo" /> </a>
+                <a href="#" class="twitter"> <img src="~/Images/twitter.png" alt="Twitter Logo" class="drustvene-mreze-logo" /> </a>
+                <a href="#" class="youtube"> <img src="~/Images/youtube.png" alt="Youtube Logo" class="drustvene-mreze-logo" /></a>
+                <a href="#" class="instagram"> <img src="~/Images/instagram.png" alt="Instagram Logo" class="drustvene-mreze-logo" /></a>
+            </div>
+
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

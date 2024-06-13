@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "TicketView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .contact-section {
+            padding-top: 100px;
+        }
+
+        h3 {
+            color: #659934;
+            font-weight: bold;
+            font-size: 2em;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+            .contact-card img {
+                width: 125px;
+                height: 125px;
+                border-radius: 50%;
+                margin-right: 20px;
+            }
+
+        .contact-info {
+            flex-grow: 1;
+        }
+
+            .contact-info h4 {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .contact-info p {
+                margin: 10px 0;
+                font-size: 14px;
+            }
+
+            .contact-info a {
+                color: #659934;
+                text-decoration: none;
+            }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 25px;
+            border: 1px solid #659934;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .form-title {
+            margin-bottom: 30px;
+        }
+
+        .contact-form button {
+            background-color: #659934;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+            .contact-form button:hover {
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
+
+        input:focus, textarea:focus {
+            outline: 1px solid #659934;
+            box-shadow: none !important;
+            border: 2px solid #659934 !important
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container contact-section">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Get in touch</h3>
+                <div class="contact-card">
+                    <img src="~/Images/user.png" alt="Profile 1">
+                    <div class="contact-info">
+                        <h4>Apotekar 1</h4>
+                        <a href="mailto:apotekar1@aApoteka.ba">apotekar1@aApoteka.ba</a>
+                        <p>+1 800 213422</p>
+                        <p>Zmaja od Bosne bb<br>71000 Sarajevo</p>
+                    </div>
+                </div>
+                <div class="contact-card">
+                    <img src="~/Images/user.png" alt="Profile 2">
+                    <div class="contact-info">
+                        <h4>Apotekar 2</h4>
+                        <a href="mailto:apotekar2@aApoteka.ba">apotekar2@aApoteka.ba</a>
+                        <p>+1 800 225883</p>
+                        <p>Zmaja od Bosne bb<br>71000 Sarajevo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="form-title">Send a ticket</h3>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your name" required>
+                    <input type="email" placeholder="E-Mail" required>
+                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send ticket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
