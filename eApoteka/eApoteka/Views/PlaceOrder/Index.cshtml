@@ -1,6 +1,5 @@
 ﻿@model eApoteka.Models.ViewModels.PlaceOrderViewModel
 
-
 @{
     ViewData["Title"] = "PlaceOrderView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,8 +25,6 @@
             text-align: center;
             padding: 50px 0;
             color: #659934;
-            font-weight: bold;
-            font-size: 3em;
         }
 
             .order-section h2 {
@@ -79,85 +76,128 @@
                     border: 2px solid #659934 !important
                 }
 
-            .order-form button {
-                background-color: #659934;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 10px;
-            }
+        .text-center {
+            font-size: 1em;
+            font-weight: normal;
+        }
 
-                .order-form button:hover {
-                    background-color: rgba(101, 153, 52, 0.8);
-                    border-color: rgba(101, 153, 52, 0.8);
-                    color: white;
-                }
+        .order-form-link {
+            font-size: 1em;
+            font-weight: normal;
+            background-color: #659934;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+        }
+
+            .order-form-link:hover {
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+                text-decoration: none;
+            }
     </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
     <div class="container order-section">
         <h2>Place your order</h2>
-        <form class="order-form">
+        <form class="order-form" asp-action="Index" method="post" id="orderForm">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="First Name*" required>
+                    <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name*" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Last Name*" required>
+                    <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name*" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <select class="form-control" required>
+                    <select class="form-control" asp-for="PaymentMethod" id="paymentMethod" required>
                         <option value="" disabled selected>Payment method</option>
                         <option value="Card">Card</option>
                         <option value="Cash on delivery">Cash on delivery</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <select class="form-control" required>
+                    <select class="form-control" asp-for="DeliveryOptions" id="deliveryOptions" required>
                         <option value="" disabled selected>Delivery options</option>
                         <option value="In-person">In-person</option>
                         <option value="Delivery">Delivery</option>
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Street" required>
+            <div id="addressFields" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" asp-for="Street" placeholder="Street">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" asp-for="Number" placeholder="No.">
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="No." required>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" asp-for="City" placeholder="City">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" asp-for="PostalCode" placeholder="Postal">
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="City" required>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="E-Mail*" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Postal" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="email" class="form-control" placeholder="E-Mail*" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" placeholder="Phone*" required>
+                    <input type="text" class="form-control" asp-for="Phone" placeholder="Phone*" required>
                 </div>
             </div>
             <div class="form-group">
-                <textarea class="form-control" rows="4" placeholder="Type your message here*" required></textarea>
+                <textarea class="form-control" asp-for="Message" rows="4" placeholder="Type your message here"></textarea>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-success">Place order</button>
+                <button type="submit" class="btn order-form-link" id="finishOrderButton">Place order</button>
             </div>
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#deliveryOptions').change(function () {
+                if ($(this).val() === 'Delivery') {
+                    $('#addressFields').show();
+                    $('#orderForm input[name="Street"]').attr('required', true);
+                    $('#orderForm input[name="Number"]').attr('required', true);
+                    $('#orderForm input[name="City"]').attr('required', true);
+                    $('#orderForm input[name="PostalCode"]').attr('required', true);
+                } else {
+                    $('#addressFields').hide();
+                    $('#orderForm input[name="Street"]').attr('required', false);
+                    $('#orderForm input[name="Number"]').attr('required', false);
+                    $('#orderForm input[name="City"]').attr('required', false);
+                    $('#orderForm input[name="PostalCode"]').attr('required', false);
+                }
+            });
+
+            $('#finishOrderButton').click(function (event) {
+                var paymentMethod = $('#paymentMethod').val();
+                if (paymentMethod === 'Card') {
+                    event.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: $('#orderForm').attr('action'),
+                        data: $('#orderForm').serialize(),
+                        success: function (response) {
+                            if (response.url) {
+                                window.location.href = response.url;
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-

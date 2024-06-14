@@ -63,6 +63,9 @@ namespace eApoteka.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AdminPanelViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Ime")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -84,6 +87,8 @@ namespace eApoteka.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminPanelViewModelId");
 
                     b.ToTable("Apotekar", (string)null);
                 });
@@ -108,6 +113,9 @@ namespace eApoteka.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("brojTelefona")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -150,6 +158,9 @@ namespace eApoteka.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AdminPanelViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("BrojTelefona")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -167,6 +178,8 @@ namespace eApoteka.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AdminPanelViewModelId");
+
                     b.ToTable("Dostavljac", (string)null);
                 });
 
@@ -177,6 +190,9 @@ namespace eApoteka.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AdminPanelViewModelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Adresa")
                         .IsRequired()
@@ -202,12 +218,19 @@ namespace eApoteka.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminPanelViewModelId");
 
                     b.ToTable("Korisnik", (string)null);
                 });
@@ -273,6 +296,10 @@ namespace eApoteka.Migrations
                     b.Property<bool>("Dostupan")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Kolicina")
                         .HasColumnType("int");
 
@@ -285,6 +312,9 @@ namespace eApoteka.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SearchViewModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Vrsta")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -296,6 +326,8 @@ namespace eApoteka.Migrations
 
                     b.HasIndex("ApotekarId");
 
+                    b.HasIndex("SearchViewModelId");
+
                     b.ToTable("Proizvod", (string)null);
                 });
 
@@ -306,10 +338,6 @@ namespace eApoteka.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Historija")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TrenutniStatus")
                         .IsRequired()
@@ -380,6 +408,150 @@ namespace eApoteka.Migrations
                     b.ToTable("Upit", (string)null);
                 });
 
+            modelBuilder.Entity("eApoteka.Models.ViewModels.AdminPanelViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdminPanelViewModel");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.LoginViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoginViewModel");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.PlaceOrderViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeliveryOptions")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlaceOrderViewModel");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.RegisterViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RegisterViewModel");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.SearchViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Search")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SearchViewModel");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.Apotekar", b =>
+                {
+                    b.HasOne("eApoteka.Models.ViewModels.AdminPanelViewModel", null)
+                        .WithMany("apotekari")
+                        .HasForeignKey("AdminPanelViewModelId");
+                });
+
             modelBuilder.Entity("eApoteka.Models.DetaljDostave", b =>
                 {
                     b.HasOne("eApoteka.Models.Dostavljac", "Dostavljac")
@@ -389,6 +561,20 @@ namespace eApoteka.Migrations
                         .IsRequired();
 
                     b.Navigation("Dostavljac");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.Dostavljac", b =>
+                {
+                    b.HasOne("eApoteka.Models.ViewModels.AdminPanelViewModel", null)
+                        .WithMany("dostavljaci")
+                        .HasForeignKey("AdminPanelViewModelId");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.Korisnik", b =>
+                {
+                    b.HasOne("eApoteka.Models.ViewModels.AdminPanelViewModel", null)
+                        .WithMany("korisnici")
+                        .HasForeignKey("AdminPanelViewModelId");
                 });
 
             modelBuilder.Entity("eApoteka.Models.Narudzba", b =>
@@ -448,6 +634,10 @@ namespace eApoteka.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("eApoteka.Models.ViewModels.SearchViewModel", null)
+                        .WithMany("Results")
+                        .HasForeignKey("SearchViewModelId");
+
                     b.Navigation("Admin");
 
                     b.Navigation("Apotekar");
@@ -490,6 +680,20 @@ namespace eApoteka.Migrations
             modelBuilder.Entity("eApoteka.Models.Narudzba", b =>
                 {
                     b.Navigation("Stavke");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.AdminPanelViewModel", b =>
+                {
+                    b.Navigation("apotekari");
+
+                    b.Navigation("dostavljaci");
+
+                    b.Navigation("korisnici");
+                });
+
+            modelBuilder.Entity("eApoteka.Models.ViewModels.SearchViewModel", b =>
+                {
+                    b.Navigation("Results");
                 });
 #pragma warning restore 612, 618
         }

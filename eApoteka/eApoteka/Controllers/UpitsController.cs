@@ -49,8 +49,7 @@ namespace eApoteka.Controllers
         // GET: Upits/Create
         public IActionResult Create()
         {
-            ViewData["ApotekarId"] = new SelectList(_context.Apotekari, "Id", "Ime");
-            ViewData["KorisnikId"] = new SelectList(_context.Korisnici, "Id", "Adresa");
+
             return View();
         }
 
@@ -59,16 +58,41 @@ namespace eApoteka.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,KorisnikId,ApotekarId,Text,Odgovor")] Upit upit)
+        public async Task<IActionResult> Create(string korisnikId, string pitanje)
         {
+            var upit = new Upit();
             if (ModelState.IsValid)
             {
+
+                string[] korisnik = korisnikId.Split(' ');
+
+                if (korisnik.Length != 2)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid korisnikId format.");
+                    return View(upit);
+                }
+
+                string Ime = korisnik[0];
+                string Prezime = korisnik[1];
+                var pomocna = await _context.Korisnici
+                                    .FirstOrDefaultAsync(k => k.Ime == Ime && k.Prezime == Prezime);
+                if (pomocna == null)
+                {
+                    // Handle the case where the korisnik is not found
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                    return View();
+                }
+
+                upit.KorisnikId = pomocna.Id;
+                upit.ApotekarId = 1;
+                upit.Text = pitanje;
+                upit.Odgovor = "Upit nije pregledan.";
+
                 _context.Add(upit);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ApotekarId"] = new SelectList(_context.Apotekari, "Id", "Ime", upit.ApotekarId);
-            ViewData["KorisnikId"] = new SelectList(_context.Korisnici, "Id", "Adresa", upit.KorisnikId);
+
             return View(upit);
         }
 

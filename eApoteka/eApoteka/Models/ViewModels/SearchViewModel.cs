@@ -7,5 +7,6 @@ namespace eApoteka.Models.ViewModels
         [Key] 
         public int Id { get; set; }
         public string Search { get; set; }
+        public List<Proizvod> Results { get; set; }
     }
 }

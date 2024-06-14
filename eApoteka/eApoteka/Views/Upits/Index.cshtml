@@ -108,7 +108,7 @@
                     <img src="~/Images/user.png" alt="Profile 1">
                     <div class="contact-info">
                         <h4>Apotekar 1</h4>
-                        <a href="mailto:apotekar1@aApoteka.ba">apotekar1@aApoteka.ba</a>
+                        <a href="mailto:apotekar1@aApoteka.ba">apotekar1@eApoteka.ba</a>
                         <p>+1 800 213422</p>
                         <p>Zmaja od Bosne bb<br>71000 Sarajevo</p>
                     </div>
@@ -117,7 +117,7 @@
                     <img src="~/Images/user.png" alt="Profile 2">
                     <div class="contact-info">
                         <h4>Apotekar 2</h4>
-                        <a href="mailto:apotekar2@aApoteka.ba">apotekar2@aApoteka.ba</a>
+                        <a href="mailto:apotekar2@aApoteka.ba">apotekar2@eApoteka.ba</a>
                         <p>+1 800 225883</p>
                         <p>Zmaja od Bosne bb<br>71000 Sarajevo</p>
                     </div>
@@ -125,10 +125,10 @@
             </div>
             <div class="col-md-6">
                 <h3 class="form-title">Send a ticket</h3>
-                <form class="contact-form">
-                    <input type="text" placeholder="Your name" required>
+                <form class="contact-form" asp-action="Create" asp-controller="Upits" method="post">
+                    <input type="text" name="korisnikId" placeholder="Your name" required>
                     <input type="email" placeholder="E-Mail" required>
-                    <textarea rows="4" placeholder="Your Message" required></textarea>
+                    <textarea rows="4" name="pitanje" placeholder="Your Message" required></textarea>
                     <button type="submit">Send ticket</button>
                 </form>
             </div>

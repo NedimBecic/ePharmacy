@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eApoteka.Data;
 using eApoteka.Models.ViewModels;
+using eApoteka.Models;
 
 namespace eApoteka.Controllers
 {
@@ -14,10 +15,13 @@ namespace eApoteka.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
         public RegisterController(ApplicationDbContext context)
         {
             _context = context;
         }
+
+
 
         // GET: Register
         public IActionResult Index()
@@ -26,6 +30,7 @@ namespace eApoteka.Controllers
 
             return View(viewModel);
         }
+
 
         // GET: Register/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -45,26 +50,42 @@ namespace eApoteka.Controllers
             return View(registerViewModel);
         }
 
-        // GET: Register/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Register/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Email,Password,PhoneNumber,Adress")] RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Create(string Name, string Surname, string Username, string Password, string PhoneNumber, string Adress)
         {
+            var model = new Korisnik();
+
             if (ModelState.IsValid)
             {
-                _context.Add(registerViewModel);
+
+                //model.Id= Id;
+                model.Ime = Name;
+                model.Prezime = Surname;
+                model.Username = Username;
+                model.Password = Password;
+                model.BrojTelefona = PhoneNumber;
+                model.Adresa = Adress;
+                model.Role = "Korisnik";
+
+                HttpContext.Session.SetString("Username", model.Username);
+                HttpContext.Session.SetInt32("UserId", model.Id);
+                HttpContext.Session.SetString("Ime", model.Ime);
+                HttpContext.Session.SetString("Prezime", model.Prezime);
+                HttpContext.Session.SetString("Adresa", model.Adresa);
+                HttpContext.Session.SetString("BrojTelefona", model.BrojTelefona);
+                HttpContext.Session.SetString("Role", "Korisnik");
+
+                _context.Korisnici.Add(model);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Login");
             }
-            return View(registerViewModel);
+            return View(model);
         }
 
         // GET: Register/Edit/5
@@ -88,7 +109,7 @@ namespace eApoteka.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Email,Password,PhoneNumber,Adress")] RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Username,Password,PhoneNumber,Adress")] RegisterViewModel registerViewModel)
         {
             if (id != registerViewModel.Id)
             {

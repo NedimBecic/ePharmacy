@@ -1,4 +1,6 @@
-﻿@{
+﻿@model eApoteka.Models.ViewModels.AdminPanelViewModel
+
+@{
     ViewData["Title"] = "AdminPanelView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -63,6 +65,7 @@
                 top: 10px;
                 right: 10px;
                 color: white;
+                cursor: pointer;
             }
 
         .admin-button {
@@ -89,69 +92,42 @@
         <div class="row">
             <div class="col card-container">
                 <h3 class="section-title">User</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
+                @foreach (var user in Model.korisnici)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <p>ID @user.Id</p>
+                            <p>@user.Ime @user.Prezime</p>
+                            <span class="close" data-id="@user.Id" data-type="user">&times;</span>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col card-container">
                 <h3 class="section-title">Pharmacist</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
+                @foreach (var pharmacist in Model.apotekari)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <p>ID @pharmacist.Id</p>
+                            <p>@pharmacist.Ime @pharmacist.Prezime</p>
+                            <span class="close" data-id="@pharmacist.Id" data-type="pharmacist">&times;</span>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
-                    </div>
-                </div>
+                }
             </div>
             <div class="col card-container">
                 <h3 class="section-title">Delivery person</h3>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
+                @foreach (var deliveryPerson in Model.dostavljaci)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <p>ID @deliveryPerson.Id</p>
+                            <p>@deliveryPerson.Ime @deliveryPerson.Prezime</p>
+                            <span class="close" data-id="@deliveryPerson.Id" data-type="delivery">&times;</span>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <p> ID MM123 </p>
-                        <p> Meho Mehic </p>
-                        <button type="button" class="close">&times;</button>
-                    </div>
-                </div>
-
+                }
             </div>
             <div class="col card-container">
                 <h3 class="section-title">Administration</h3>
@@ -161,5 +137,34 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.close').on('click', function () {
+                var id = $(this).data('id');
+                var type = $(this).data('type');
+                var url = '';
+                if (type === 'user') {
+                    url = '@Url.Action("DeleteUser", "AdminPanel")';
+                } else if (type === 'pharmacist') {
+                    url = '@Url.Action("DeletePharmacist", "AdminPanel")';
+                } else if (type === 'delivery') {
+                    url = '@Url.Action("DeleteDeliveryPerson", "AdminPanel")';
+                }
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: { id: id },
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Error: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,54 +1,197 @@
 ﻿@model eApoteka.Models.Narudzba
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "OrderDetailsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
 
-<div>
-    <h4>Narudzba</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DetaljPlacanja)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DetaljPlacanja.StatusPlacanja)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DetaljDostave)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DetaljDostave.AdresaDostave)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Korisnik)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Korisnik.Adresa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apotekar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apotekar.Ime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StatusNarudzbe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StatusNarudzbe.TrenutniStatus)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Timestamp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Timestamp)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        .container {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        .my-4 {
+            color: #659934;
+            font-weight: bold;
+            font-size: 3em;
+            margin-bottom: 2em !important;
+        }
+
+        .breakpoint {
+            border-top: 2px solid #659934;
+        }
+
+        .order-card {
+            padding: 30px;
+            margin: 15px 0;
+            background-color: #fffff;
+            border-bottom: 2px solid;
+            border-color: #659934;
+        }
+
+        .order-img img {
+            height: 100px;
+            width: 150px;
+            margin-top: 30px;
+        }
+
+        .order-content {
+            padding-top: 20px;
+            padding-left: 20px;
+        }
+
+            .order-content a {
+                color: #659934;
+            }
+
+            .order-content h5 {
+                color: #659934;
+                font-weight: bold;
+            }
+
+        .order-status-icon {
+            font-size: 24px;
+            color: #659934;
+            float: right;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+            .order-status-icon:hover {
+                width: 28px;
+                height: 28px;
+            }
+
+        .quantity-input {
+            width: 65px;
+            border: 2px solid #659934;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .truncate-single-line {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 90%;
+        }
+
+        .button-container {
+            align-items: center;
+            margin: auto;
+            align-content: center;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 150px;
+            padding: 10px 20px;
+            background-color: #659934;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+            .button:hover {
+                text-decoration: none;
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center my-4">Your order details</h2>
+        <div class="breakpoint"></div>
+        @foreach (var stavka in Model.Stavke)
+        {
+            <div class="order-card">
+                <div class="row">
+                    <div class="col-2 order-img">
+                        <img src="@stavka.Proizvod.ImageUrl" alt="@stavka.Proizvod.Naziv Image">
+                    </div>
+                    <div class="col-10 order-content">
+                        <h5>@stavka.Proizvod.Naziv</h5>
+                        <p class="truncate-single-line">@stavka.Proizvod.Opis</p>
+                        <input type="number" name="quantity" min="1" max="99" value="@stavka.Kolicina" class="quantity-input" data-stavka-id="@stavka.Id">
+                        <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon" data-stavka-id="@stavka.Id">
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="text-center">
+            <h4>Total: <span id="orderTotal">@ViewBag.OrderTotal</span>$</h4>
+        </div>
+        <div class="button-container">
+            <a href="/PlaceOrder" class="button">Finish order</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Handle quantity update
+            $('.quantity-input').on('change', function () {
+                var stavkaId = $(this).data('stavka-id');
+                var quantity = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "OrderDetails")',
+                    type: 'POST',
+                    data: {
+                        stavkaId: stavkaId,
+                        quantity: quantity
+                    },
+                    success: function (result) {
+                        // Update the order total
+                        $('#orderTotal').text(result.orderTotal);
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            });
+
+            // Handle item removal
+            $('.order-status-icon').on('click', function () {
+                var stavkaId = $(this).data('stavka-id');
+                $.ajax({
+                    url: '@Url.Action("RemoveItem", "OrderDetails")',
+                    type: 'POST',
+                    data: {
+                        stavkaId: stavkaId
+                    },
+                    success: function (result) {
+                        // Remove the item from the DOM
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

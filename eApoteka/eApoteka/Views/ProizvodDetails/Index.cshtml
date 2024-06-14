@@ -1,5 +1,5 @@
-﻿@model eApoteka.Models.Proizvod
-
+﻿
+@model eApoteka.Models.Proizvod
 
 @{
     ViewData["Title"] = "ProductDetailsView";
@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paracetamol Information</title>
+    <title>@Model.Naziv Information</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html, body {
@@ -26,10 +26,13 @@
             text-align: center;
             padding-top: 60px;
             padding-bottom: 30px;
-            color: #659934;
-            font-weight: bold;
-            font-size: 3em;
         }
+
+            .header-custom h2 {
+                color: #659934;
+                font-weight: 600;
+                font-size: 3em;
+            }
 
         .content {
             display: flex;
@@ -103,40 +106,55 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
+
+        .btn-plus:hover {
+                text-decoration: none;
+                color: white;
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+        }
+
+        .typeAndQuantity {
+            display: inline-flex;
+            
+        } 
+        .typeAndQuantityTitle {
+             font-weight: bold;
+             margin-right: 5px;
+        }
+        .typeAndQuantityText {
+            margin-right: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header-custom">
-            <h2>Paracetamol</h2>
+            <h2>@Model.Naziv</h2>
         </div>
         <div class="content">
             <div class="content-text1">
-                <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonu eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volupta. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonu eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volupta. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonu eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam volupta. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-                <h3>Unsorted list</h3>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur sadipscing elitr</li>
-                    <li>At vero eos et accusam et justo duo dolores et ea rebum</li>
-                    <li>Justo duo dolores et ea rebum. Stet clita kasd</li>
-                    <li>Magna aliquyam erat, sed diam voluptua at vero eos et accusam</li>
-                    <li>Invidunt ut labore et dolore magna aliquyam erat, sed diam</li>
-                </ul>
+                <p>@Model.Opis</p>
+                <div class="typeAndQuantity">
+                    <p class="typeAndQuantityTitle">Type: </p>
+                    <p class="typeAndQuantityText"> @Model.Vrsta </p>
+                    <p class="typeAndQuantityTitle">Quantity: </p>
+                    <p class="typeAndQuantityText"> @Model.Kolicina </p>
+                </div>
+
             </div>
             <div class="content-text2">
                 <div class="content-image">
-                    <img src="~/Images/Paracetamol.jpg" alt="Paracetamol Image">
+                    <img src="@Model.ImageUrl" alt="@Model.Naziv Image">
                 </div>
-                <h3>Subheadline</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
-                <div class="additional-link">
-                    <a href="#">Additional Link for further Information</a>
+                <div class="typeAndQuantity">
+                    <p class="typeAndQuantityTitle">Price: </p>
+                    <p class ="typeAndQuantityText"> @Model.Cijena $</p>
                 </div>
             </div>
         </div>
         <div class="btn-plus-container">
-            <button class="btn-plus">+</button>
+            <a href="@Url.Action("AddToOrder", "OrderDetails", new { id = Model.Id })" class="btn-plus">+</a>
         </div>
     </div>
 
@@ -144,5 +162,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
 

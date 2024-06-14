@@ -1,7 +1,7 @@
 ﻿@model eApoteka.Models.Narudzba
 
 @{
-    ViewData["Title"] = "ShowOrderDetailsView";
+    ViewData["Title"] = "OrderDetailsView";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -71,7 +71,13 @@
             float: right;
             width: 24px;
             height: 24px;
+            cursor: pointer;
         }
+
+            .order-status-icon:hover {
+                width: 28px;
+                height: 28px;
+            }
 
         .quantity-input {
             width: 65px;
@@ -80,67 +86,112 @@
             border-radius: 10px;
         }
 
+        .truncate-single-line {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 90%;
+        }
+
+        .button-container {
+            align-items: center;
+            margin: auto;
+            align-content: center;
+        }
+
+        .button {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 150px;
+            padding: 10px 20px;
+            background-color: #659934;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: auto;
+            margin-top: 30px;
+        }
+
+            .button:hover {
+                text-decoration: none;
+                background-color: rgba(101, 153, 52, 0.8);
+                border-color: rgba(101, 153, 52, 0.8);
+                color: white;
+            }
     </style>
 </head>
 <body>
     <div class="container">
         <h2 class="text-center my-4">Your order details</h2>
-        <div class="breakpoint"> </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-img">
-                    <img src="~/Images/Paracetamol.jpg" alt="Paracetamol Image">
-                </div>
-                <div class="col-10 order-content">
-                    <h5>First Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <input type="number" name="quantity" min="1" max="99" value="1" class="quantity-input">
-                    <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon">
+        <div class="breakpoint"></div>
+        @foreach (var stavka in Model.Stavke)
+        {
+            <div class="order-card">
+                <div class="row">
+                    <div class="col-2 order-img">
+                        <img src="@stavka.Proizvod.ImageUrl" alt="@stavka.Proizvod.Naziv Image">
+                    </div>
+                    <div class="col-10 order-content">
+                        <h5>@stavka.Proizvod.Naziv</h5>
+                        <p class="truncate-single-line">@stavka.Proizvod.Opis</p>
+                        <input type="number" name="quantity" min="1" max="99" value="@stavka.Kolicina" class="quantity-input" data-stavka-id="@stavka.Id">
+                        <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon" data-stavka-id="@stavka.Id">
+                    </div>
                 </div>
             </div>
+        }
+        <div class="text-center">
+            <h4>Total: <span id="orderTotal">@ViewBag.OrderTotal</span> $</h4>
         </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-img">
-                    <img src="~/Images/Paracetamol.jpg" alt="Paracetamol Image">
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Second Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <input type="number" name="quantity" min="1" max="99" value="1" class="quantity-input">
-                    <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon">
-                </div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-img">
-                    <img src="~/Images/Paracetamol.jpg" alt="Paracetamol Image">
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Third Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <input type="number" name="quantity" min="1" max="99" value="1" class="quantity-input">
-                    <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon">
-                </div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-img">
-                    <img src="~/Images/Paracetamol.jpg" alt="Paracetamol Image">
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Fourth Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <input type="number" name="quantity" min="1" max="99" value="1" class="quantity-input">
-                    <img src="~/Images/trash-can.png" alt="Trash can icon" class="order-status-icon">
-                </div>
-            </div>
+        <div class="button-container">
+            <a href="/PlaceOrder" class="button">Finish order</a>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Handle quantity update
+            $('.quantity-input').on('change', function () {
+                var stavkaId = $(this).data('stavka-id');
+                var quantity = $(this).val();
+                $.ajax({
+                    url: '@Url.Action("UpdateQuantity", "OrderDetails")',
+                    type: 'POST',
+                    data: {
+                        stavkaId: stavkaId,
+                        quantity: quantity
+                    },
+                    success: function (result) {
+                        // Update the order total
+                        $('#orderTotal').text(result.orderTotal);
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            });
+
+            // Handle item removal
+            $('.order-status-icon').on('click', function () {
+                var stavkaId = $(this).data('stavka-id');
+                $.ajax({
+                    url: '@Url.Action("RemoveItem", "OrderDetails")',
+                    type: 'POST',
+                    data: {
+                        stavkaId: stavkaId
+                    },
+                    success: function (result) {
+                        // Remove the item from the DOM
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-

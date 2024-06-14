@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("eApoteka")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79429e3001c2f4df82d2b1d87055e56f94e30149")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+18d65a46207d7ad7ee0d72bb6c5e4a01938a6599")]
 [assembly: System.Reflection.AssemblyProductAttribute("eApoteka")]
 [assembly: System.Reflection.AssemblyTitleAttribute("eApoteka")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

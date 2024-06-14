@@ -21,12 +21,21 @@
             color: #333;
         }
 
+        .container-personal {
+            padding-bottom: 50px;
+        }
+
         .page-title {
             margin-bottom: 50px;
             font-weight: bold;
             color: #659934;
             font-size: 2.5em;
             text-align: center;
+        }
+
+        .col {
+            max-width: 700px;
+            margin: auto;
         }
 
         .form-container {
@@ -93,47 +102,119 @@
             border-color: rgba(101, 153, 52, 0.8);
             color: white !important;
         }
+
+        .url {
+            padding-top: 20px;
+        }
+
     </style>
 </head>
 <body>
-
     <div class="container mt-5">
         <div class="row">
-            <h2 class="page-title">Product panel</h2>
-            <div class="col-md-6 container-left">
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Name">
-                </div>
-                <div class="form-container">
+            <h2 class="page-title">Product Panel</h2>
+            <div class="col">
+                <form asp-action="Create" asp-controller="ProizvodPanel" method="post">
                     <div class="form-group">
-                        <label for="type">Type:</label>
-                        <input type="text" class="form-control" id="composition" placeholder="Enter Type">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
                     </div>
-                    <div class="form-group">
-                        <label for="description">Product description:</label>
-                        <textarea rows="4" placeholder="Your Message" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price:</label>
-                        <input type="text" class="form-control" id="price" placeholder="Enter Price">
+                    <div class="form-container">
+                        <div class="form-group">
+                            <label for="type">Type:</label>
+                            <input type="text" class="form-control" id="type" name="type" placeholder="Enter Type">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Product description:</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Your Message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price:</label>
+                            <input type="text" class="form-control" id="price" name="price" placeholder="Enter Price">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="text" class="form-control" id="kolicina" name="quantity" placeholder="Enter Quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="image-url">Image URL:</label>
+                            <input type="text" class="form-control" id="image-url" name="imageUrl" placeholder="Enter Image URL">
+                        </div>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-md-6 align-items-center">
-                <div class="image-upload">
-                    <label for="upload-image" class="w-100 h-100 d-flex align-items-center justify-content-center">
-                        Image
-                        <input type="file" id="upload-image" class="d-none">
-                    </label>
-                </div>
-                <button class="btn btn-delete">Delete</button>
-                <button class="btn btn-save" style="margin-right: 10px">Save</button>
 
+                    <button type="submit" class="btn btn-save" style="margin-left: 20px">Save</button>
+                    <button type="button" class="btn btn-delete">Delete</button>
+                </form>
             </div>
         </div>
     </div>
+    @*  <div class="col-md-6 align-items-center">
+    <div class="image-upload">
+    <label for="upload-image" class="w-100 h-100 d-flex align-items-center justify-content-center">
+    Add Image
+    <input type="file" id="upload-image" class="d-none">
+    </label>
+    </div>
+    </div>
+    </div>
+    </div> *@
+
+
+    @*  <div class="container mt-5">
+    <div class="row">
+    <h2 class="page-title">Product panel</h2>
+    <div class="col-md-6 container-left">
+    <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter Name">
+    </div>
+    <div class="form-container">
+    <div class="form-group">
+    <label for="type">Type:</label>
+    <input type="text" class="form-control" id="composition" placeholder="Enter Type">
+    </div>
+    <div class="form-group">
+    <label for="description">Product description:</label>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    </div>
+    <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="text" class="form-control" id="price" placeholder="Enter Price">
+    </div>
+    <div class="form-group">
+    <label for="kolicina">Kolicina:</label>
+    <input type="text" class="form-control" id="kolicina" placeholder="Enter Quantity">
+    </div>
+
+    </div>
+    </div>
+    <div class="col-md-6 align-items-center">
+    <div class="image-upload">
+    <label for="upload-image" class="w-100 h-100 d-flex align-items-center justify-content-center">
+    Add Image
+    <input type="file" id="upload-image" class="d-none">
+    </label>
+    </div>
+    <button class="btn btn-delete">Delete</button>
+    <button class="btn btn-save" style="margin-right: 10px">Save</button>
+
+    </div>
+    </div>
+    </div> *@
+
+    @*  <script>
+    document.getElementById('productForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var imageUrl = document.getElementById('image-url').value;
+
+    // console.log('Image URL:', imageUrl);
+
+    var form = event.target;
+    form.submit();
+    });
+    </script> *@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

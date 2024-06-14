@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var role = Context.Session.GetString("Role") ?? string.Empty;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -6,6 +9,7 @@
     <title>@ViewData["Title"] - eApoteka</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="shortcut icon" href="~/Images/logo.png" />
     <style>
         html, body {
             height: 100%;
@@ -121,11 +125,31 @@
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="#">Početna</a></li>
-                <li><a href="#">Tiketi</a></li>
-                <li><a href="#">Narudžbe</a></li>
-                <li><a href="#">Prijava</a></li>
-                <li><a href="#">Pretraga</a></li>
+                @if (role == "Admin")
+                {
+                    <li><a asp-controller="AdminPanel" asp-action="Index">Admin Panel</a></li>
+                    <li><a asp-controller="ProizvodPanel" asp-action="Index">Proizvod Panel</a></li>
+                    <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                    <li><a asp-controller="Search" asp-action="Index">Pretraga</a></li>
+                }
+                else if (role == "Apotekar")
+                {
+                    <li><a asp-controller="PharmacistPanel" asp-action="Index">Pharmacist Panel</a></li>
+                    <li><a asp-controller="ProizvodPanel" asp-action="Index">Proizvod Panel</a></li>
+                    <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                    <li><a asp-controller="Search" asp-action="Index">Pretraga</a></li>
+                }
+                else if (role == "Korisnik")
+                {
+                    <li><a asp-controller="Upits" asp-action="Index">Tiket</a></li>
+                    <li><a asp-controller="ShowOrders" asp-action="Index">Narudzbe</a></li>
+                    <li><a asp-controller="Login" asp-action="Logout">Logout</a></li>
+                    <li><a asp-controller="Search" asp-action="Index">Pretraga</a></li>
+                }
+                else
+                {
+                    <li><a asp-controller="Login" asp-action="Index">Prijava</a></li>
+                }
             </ul>
         </nav>
     </header>
@@ -153,9 +177,11 @@
 
         </div>
     </footer>
+
+    @RenderSection("Scripts", required: false)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    
 </body>
 </html>

@@ -60,7 +60,17 @@
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
+                text-decoration: none;
             }
+
+            
+            .btn-login:hover, .btn-register:hover {
+            text-decoration: none;
+            background-color: rgba(101, 153, 52, 0.8);
+            border-color: rgba(101, 153, 52, 0.8);
+            color: white;
+            }
+
     </style>
 
 </head>
@@ -71,8 +81,8 @@
                 <img src="~/Images/logo-reverse.png" alt="eApoteka logo" class="big-logo"/>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor. Duis nec sem at orci commodo viverra id in.</p>
                 <div class="buttons">
-                    <button class="btn-register" onclick="location.href='@Url.Action("RegisterView", "Home")'"> Registracija </button>
-                    <button class="btn-login" onclick="location.href='@Url.Action("LoginView", "Home")'">Prijava</button>
+                    <a class="btn-register" asp-controller="Register" asp-action="Index"> Registracija </a>
+                    <a class="btn-login" asp-controller="Login" asp-action="Index" >Prijava</a>
                 </div>
             </div>
         </section>

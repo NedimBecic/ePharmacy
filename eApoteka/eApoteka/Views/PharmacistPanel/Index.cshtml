@@ -1,4 +1,5 @@
-﻿@model eApoteka.Models.Upit
+﻿@* @model eApoteka.Models.Upit *@
+@model List<Upit>
 
 @{
     ViewData["Title"] = "PharmacistPanelView";
@@ -108,10 +109,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="btn-group-vertical w-100">
-                    <button class="btn btn-custom2">Ticket ID AC225<br>Adnan Corovic</button>
+
+                    @foreach (var id in Model)
+                    {
+                        <button class="btn btn-custom2" data-text="@id.Text" data-id="@id.Id">Ticket ID: @id.Id <br></button>
+                        @* <a href="@Url.Action("Details", "Person", new { name = name })">@name</a> *@
+                    }
+                    @* <button class="btn btn-custom2">Ticket ID AC225<br>Adnan Corovic</button>
                     <button class="btn btn-custom2">Ticket ID NB883<br>Nedim Becic</button>
                     <button class="btn btn-custom2">Ticket ID RO456<br>Rijad Okeric</button>
-                    <button class="btn btn-custom2">Ticket ID ID000<br>Dzeljan Imadzinieri</button>
+                    <button class="btn btn-custom2">Ticket ID ID000<br>Dzeljan Imadzinieri</button> *@
                 </div>
                 <div class="mt-3">
                     <button class="btn btn-custom btn-block">Product Panel</button>
@@ -121,16 +128,60 @@
             <div class="col-md-8 right-container">
                 <div class="panel">
                     <div class="panel-title">Ticket</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p id="pitanje"> Tekst upita.</p>
                 </div>
                 <div class="panel">
                     <div class="panel-title">Answer</div>
-                    <textarea placeholder="Enter your answer here..." class="answer-panel"></textarea>
+                    <textarea id="odg" placeholder="Enter your answer here..." class="answer-panel"></textarea>
                 </div>
-                <button class="btn btn-custom float-right">Reply</button>
+                <button id="reply" class="btn btn-custom float-right">Reply</button>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.btn.btn-custom2').click(function () {
+                var text = $(this).data('text');
+                $('#pitanje').text(text);
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#reply').click(function () {
+                var newText = $('#odg').val();
+                var id = $('.btn.btn-custom2').data('id');
+
+
+                console.log("ID:", id);
+
+                $.ajax({
+                    url: '@Url.Action("UpdateInstance", "PharmacistPanel")',
+                    type: 'POST',
+                    data: { newText: newText, id: id },
+                    success: function (data) {
+                        if (data.success) {
+                            // alert("Instance updated successfully!");
+
+
+                            $('#odg').val('');
+                            location.reload();
+
+                        } else {
+                            alert("Error updating instance: " + data.errorMessage);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error updating instance: " + error);
+                    }
+                });
+            });
+        });
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

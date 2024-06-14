@@ -1,5 +1,4 @@
-﻿@model eApoteka.Models.Narudzba
-
+﻿@model List<eApoteka.Models.Narudzba>
 
 @{
     ViewData["Title"] = "ShowOrdersView";
@@ -45,7 +44,9 @@
         }
 
         .order-date {
-            font-size: 26px !important;
+            font-size: 36px !important;
+            color: #659934;
+            font-weight: 600;
             text-align: center;
             background-color: #fffff;
             border: 1px solid;
@@ -79,66 +80,44 @@
 <body>
     <div class="container">
         <h2 class="text-center my-4">Your Orders</h2>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-date">
-                    <div>28</div>
-                    <div>JAN</div>
+        @if (Model != null && Model.Count > 0)
+        {
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                var order = Model[i];
+                <div class="order-card">
+                    <div class="row">
+                        <div class="col-2 order-date">
+                            <div>@order.Timestamp.ToString("dd")</div>
+                            <div>@order.Timestamp.ToString("MMM")</div>
+                        </div>
+                        <div class="col-10 order-content">
+                            <h5>Order no. @(i + 1)</h5>
+                            <p>@(order.DetaljDostave?.AdresaDostave ?? "No address provided")</p>
+                            <p>
+                                @if (order.Stavke != null && order.Stavke.Count > 0)
+                                {
+                                    @foreach (var item in order.Stavke)
+                                    {
+                                        <span>@(item.Proizvod?.Naziv ?? "Unknown product") (@item.Kolicina x $@(item.Proizvod?.Cijena.ToString("F2") ?? "0.00"))<br /></span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span>No products in order</span>
+                                }
+                            </p>
+                            <p>Total: $@(order.Stavke?.Sum(s => (s.Proizvod?.Cijena ?? 0) * s.Kolicina).ToString("F2") ?? "0.00")</p>
+                            <img src="~/Images/delivery-truck.png" alt="Truck Icon" class="order-status-icon" style="width: 48px; height: 48px; float: right;">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-10 order-content">
-                    <h5>First Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <a href="#">Read more</a>
-                    <i class="order-status-icon">...</i>
-                </div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-date">
-                    <div>28</div>
-                    <div>JAN</div>
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Second Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <a href="#">Read more</a>
-                    <!-- <i class="order-status-icon">&#128666;</i> -->
-                    <img src="~/Images/delivery-truck.png" alt="Truck Icon" class="order-status-icon" style="width: 48px; height: 48px; float: right;">
-                </div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-date">
-                    <div>28</div>
-                    <div>JAN</div>
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Third Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <a href="#">Read more</a>
-                    <i class="order-status-icon">&#10004;</i>
-                </div>
-            </div>
-        </div>
-        <div class="order-card">
-            <div class="row">
-                <div class="col-2 order-date">
-                    <div>28</div>
-                    <div>JAN</div>
-                </div>
-                <div class="col-10 order-content">
-                    <h5>Fourth Order</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce convallis pellentesque metus id lacinia. Nunc dapibus pulvinar auctor.</p>
-                    <a href="#">Read more</a>
-                    <i class="order-status-icon">&#10004;</i>
-                </div>
-            </div>
-        </div>
+            }
+        }
+        else
+        {
+            <p>No orders found.</p>
+        }
     </div>
 </body>
 </html>
-
-
-

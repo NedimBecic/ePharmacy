@@ -28,54 +28,6 @@ namespace eApoteka.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public ActionResult LoginView()
-        {
-            return View();
-        }
-
-        public ActionResult RegisterView()
-        {
-            return View();
-        }
-
-        public ActionResult PretragaView()
-        {
-            return View();
-        }
-
-        public ActionResult TicketView()
-        {
-            return View();
-        }
-
-        public ActionResult PlaceOrderView()
-        {
-            return View();
-        }
-        public ActionResult ProductDetailsView()
-        {
-            return View();
-        }
-        public ActionResult ShowOrdersView()
-        {
-            return View();
-        }
-        public ActionResult ShowOrderDetailsView()
-        {
-            return View();
-        }
-        public ActionResult PharmacistPanelView()
-        {
-            return View();
-        }
-        public ActionResult AdminPanelView()
-        {
-            return View();
-        }
-        public ActionResult ProductView()
-        {
-            return View();
-        }
     }
 }
 

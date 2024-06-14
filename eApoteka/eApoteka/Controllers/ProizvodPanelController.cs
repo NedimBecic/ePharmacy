@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eApoteka.Data;
 using eApoteka.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace eApoteka.Controllers
 {
@@ -59,17 +60,38 @@ namespace eApoteka.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naziv,Vrsta,Opis,Kolicina,Cijena,ApotekarId,AdminId,Dostupan")] Proizvod proizvod)
+        public async Task<IActionResult> Create(string name, string type, string description, double price, int quantity, string imageUrl)
         {
+            var product = new Proizvod();
             if (ModelState.IsValid)
             {
-                _context.Add(proizvod);
+                product.Naziv = name;
+                product.Vrsta = type;
+                product.Opis = description;
+                product.Cijena = price;
+                product.Kolicina = quantity;
+                if (quantity > 0)
+                {
+                    product.Dostupan = true;
+                }
+                else
+                {
+                    product.Dostupan = false;
+                }
+                product.ImageUrl = imageUrl;
+
+                product.AdminId = 1;
+                product.ApotekarId = 1;
+
+
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AdminId"] = new SelectList(_context.Admins, "Id", "Ime", proizvod.AdminId);
-            ViewData["ApotekarId"] = new SelectList(_context.Apotekari, "Id", "Ime", proizvod.ApotekarId);
-            return View(proizvod);
+
+            ViewData["AdminId"] = new SelectList(_context.Admins, "Id", "Ime", product.AdminId);
+            ViewData["ApotekarId"] = new SelectList(_context.Apotekari, "Id", "Ime", product.ApotekarId);
+            return View(product);
         }
 
         // GET: ProizvodPanel/Edit/5

@@ -10,7 +10,5 @@ namespace eApoteka.Models
         [Required]
         [StringLength(50)]
         public string TrenutniStatus { get; set; }
-
-        public List<string> Historija { get; set; } = new List<string>();
     }
 }

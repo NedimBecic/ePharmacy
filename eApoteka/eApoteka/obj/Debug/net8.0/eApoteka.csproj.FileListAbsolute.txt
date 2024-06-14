@@ -525,3 +525,4 @@ C:\Users\nedim\OneDrive\Desktop\OOAD\Tim3\eApoteka\eApoteka\obj\Debug\net8.0\ref
 C:\Users\nedim\OneDrive\Desktop\OOAD\Tim3\eApoteka\eApoteka\obj\Debug\net8.0\eApoteka.pdb
 C:\Users\nedim\OneDrive\Desktop\OOAD\Tim3\eApoteka\eApoteka\obj\Debug\net8.0\eApoteka.genruntimeconfig.cache
 C:\Users\nedim\OneDrive\Desktop\OOAD\Tim3\eApoteka\eApoteka\obj\Debug\net8.0\ref\eApoteka.dll
+C:\Users\nedim\OneDrive\Desktop\OOAD\Tim3\eApoteka\eApoteka\bin\Debug\net8.0\Stripe.net.dll

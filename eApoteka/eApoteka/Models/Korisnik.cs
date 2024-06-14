@@ -30,5 +30,9 @@ namespace eApoteka.Models
         [Required]
         [StringLength(50)]
         public string Password { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string Role { get; set; }
     }
 }

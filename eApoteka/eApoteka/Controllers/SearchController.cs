@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using eApoteka.Data;
 using eApoteka.Models.ViewModels;
+using eApoteka.Models;
 
 namespace eApoteka.Controllers
 {
@@ -19,7 +15,6 @@ namespace eApoteka.Controllers
             _context = context;
         }
 
-        // GET: Search
         public IActionResult Index()
         {
             var viewModel = new SearchViewModel
@@ -30,133 +25,32 @@ namespace eApoteka.Controllers
             return View(viewModel);
         }
 
-        // GET: Search/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public IActionResult GetSuggestions(string term)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var suggestions = _context.Proizvodi
+                .Where(p => p.Naziv.Contains(term))
+                .Select(p => new { id = p.Id, name = p.Naziv, price = p.Cijena })
+                .ToList();
 
-            var searchViewModel = await _context.SearchViewModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (searchViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(searchViewModel);
+            return Json(suggestions);
         }
 
-        // GET: Search/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Search/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Search")] SearchViewModel searchViewModel)
+        public IActionResult Search(SearchViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!string.IsNullOrEmpty(model.Search))
             {
-                _context.Add(searchViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                model.Results = _context.Proizvodi
+                    .Where(p => p.Naziv.Contains(model.Search) || p.Opis.Contains(model.Search))
+                    .ToList();
             }
-            return View(searchViewModel);
-        }
-
-        // GET: Search/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
+            else
             {
-                return NotFound();
+                model.Results = new List<Proizvod>();
             }
 
-            var searchViewModel = await _context.SearchViewModel.FindAsync(id);
-            if (searchViewModel == null)
-            {
-                return NotFound();
-            }
-            return View(searchViewModel);
-        }
-
-        // POST: Search/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Search")] SearchViewModel searchViewModel)
-        {
-            if (id != searchViewModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(searchViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!SearchViewModelExists(searchViewModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(searchViewModel);
-        }
-
-        // GET: Search/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var searchViewModel = await _context.SearchViewModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (searchViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(searchViewModel);
-        }
-
-        // POST: Search/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var searchViewModel = await _context.SearchViewModel.FindAsync(id);
-            if (searchViewModel != null)
-            {
-                _context.SearchViewModel.Remove(searchViewModel);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool SearchViewModelExists(int id)
-        {
-            return _context.SearchViewModel.Any(e => e.Id == id);
+            return View("Index", model);
         }
     }
 }

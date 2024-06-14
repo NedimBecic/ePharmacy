@@ -22,7 +22,8 @@ namespace eApoteka.Controllers
         // GET: PharmacistPanel
         public IActionResult Index()
         {
-            return View();
+            var upitnici = _context.Upiti.Where(x => x.Odgovor == "Upit nije pregledan.").ToList();
+            return View(upitnici);
         }
 
         // GET: PharmacistPanel/Details/5
@@ -44,6 +45,62 @@ namespace eApoteka.Controllers
 
             return View(upit);
         }
+
+
+
+
+
+
+
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> UpdateOdgovor(int id, string odg)
+
+        //{
+        //    var upitnici = _context.Upiti.ToList();
+        //    Upit pomocna = upitnici[id];
+        //    if (ModelState.IsValid)
+        //    {
+        //        pomocna.Odgovor = odg;
+        //        _context.Update(pomocna);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+
+        //    return View(pomocna);
+        //}
+
+
+        [HttpPost]
+        public ActionResult UpdateInstance(string newText, int id)
+        {
+
+            var upitnik = _context.Upiti.FirstOrDefault(x => x.Id == id);
+
+            if (upitnik != null)
+            {
+                upitnik.Odgovor = newText;
+
+                _context.SaveChanges();
+
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false, errorMessage = "Instance not found" });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: PharmacistPanel/Create
         public IActionResult Create()

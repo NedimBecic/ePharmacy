@@ -1,66 +1,141 @@
 ﻿@model eApoteka.Models.Proizvod
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "ProductDetailsView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Naziv Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
 
-<div>
-    <h4>Proizvod</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vrsta)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vrsta)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kolicina)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kolicina)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cijena)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cijena)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apotekar)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apotekar.Ime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Admin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Admin.Ime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Dostupan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Dostupan)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        .header-custom {
+            text-align: center;
+            padding-top: 60px;
+            padding-bottom: 30px;
+            color: #659934;
+            font-weight: bold;
+            font-size: 3em;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .content-text1, .content-text2 {
+            flex: 1;
+            justify-content: space-between;
+            padding-right: 40px;
+        }
+
+        .content-text ul {
+            padding-left: 20px;
+        }
+
+        .content-image {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .content-image img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 10px;
+            }
+
+        .additional-link {
+            margin-top: 38px;
+        }
+
+            .additional-link a {
+                color: #659934;
+                text-decoration: none;
+            }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .content-text1 p, .content-text2 p {
+            text-align: justify;
+        }
+
+        .btn-plus-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn-plus {
+            background-color: #659934;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-custom">
+            <h2>@Model.Naziv</h2>
+        </div>
+        <div class="content">
+            <div class="content-text1">
+                <p>@Model.Opis</p>
+                <h3>Details</h3>
+                <ul>
+                    <li>Type: @Model.Vrsta</li>
+                    <li>Quantity: @Model.Kolicina</li>
+                    <li>Price: @Model.Cijena</li>
+                </ul>
+            </div>
+            <div class="content-text2">
+                <div class="content-image">
+                    <img src="@Model.ImageUrl" alt="@Model.Naziv Image">
+                </div>
+                <h3>Subheadline</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+                <div class="additional-link">
+                    <a href="#">Additional Link for further Information</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-plus-container">
+            <button class="btn-plus">+</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

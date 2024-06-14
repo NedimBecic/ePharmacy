@@ -1,4 +1,5 @@
-﻿using eApoteka.Models;
+﻿
+using eApoteka.Models;
 using eApoteka.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -99,3 +100,4 @@ namespace eApoteka.Data
         public DbSet<eApoteka.Models.ViewModels.PlaceOrderViewModel> PlaceOrderViewModel { get; set; } = default!;
     }
 }
+

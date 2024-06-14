@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eApoteka.Data;
 using eApoteka.Models.ViewModels;
+using eApoteka.Models;
+using System.Net.NetworkInformation;
 
 namespace eApoteka.Controllers
 {
@@ -18,8 +20,6 @@ namespace eApoteka.Controllers
         {
             _context = context;
         }
-
-        // GET: Login
         public async Task<IActionResult> Index()
         {
             var users = await _context.Korisnici
@@ -28,127 +28,59 @@ namespace eApoteka.Controllers
                     username = u.Username,
                     password = u.Password
                 })
-                .ToListAsync();
+                .FirstOrDefaultAsync();
 
             return View(users);
         }
 
-        // GET: Login/Details/5
-        public IActionResult PlaceOrder()
-        {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(string Username, string Password)
+        {   
+
             var viewModel = new LoginViewModel();
-            return View(viewModel);
-        }
+            var admin = _context.Admins.Where(m => m.Password == Password && m.Username == Username).FirstOrDefault();
+            if (admin != null)
+            {
+                HttpContext.Session.SetString("Username", admin.Username);
+                HttpContext.Session.SetInt32("UserId", admin.Id);
+                HttpContext.Session.SetString("Ime", admin.Ime);
+                HttpContext.Session.SetString("Prezime", admin.Prezime);
+                HttpContext.Session.SetString("Role", "Admin");
+                return RedirectToAction("Index", "AdminPanel");
+            }
+            var apotekar = _context.Apotekari.Where(m => m.Password == Password && m.Username == Username).FirstOrDefault();
+            if (apotekar != null)
+            {
+                HttpContext.Session.SetString("Username", apotekar.Username);
+                HttpContext.Session.SetInt32("UserId", apotekar.Id);
+                HttpContext.Session.SetString("Ime", apotekar.Ime);
+                HttpContext.Session.SetString("Prezime", apotekar.Prezime);
+                HttpContext.Session.SetString("Role", "Apotekar");
+                return RedirectToAction("Index", "PharmacistPanel");
+            }
+            var korisnik = _context.Korisnici.Where(m => m.Password == Password && m.Username == Username).FirstOrDefault();
+            if (korisnik != null)
+            {
+                HttpContext.Session.SetString("Username", korisnik.Username);
+                HttpContext.Session.SetInt32("UserId", korisnik.Id);
+                HttpContext.Session.SetString("Ime", korisnik.Ime);
+                HttpContext.Session.SetString("Prezime", korisnik.Prezime);
+                HttpContext.Session.SetString("Adresa", korisnik.Adresa);
+                HttpContext.Session.SetString("BrojTelefona", korisnik.BrojTelefona);
+                HttpContext.Session.SetString("Role", "Korisnik");
 
-        // GET: Login/Create
-        public IActionResult Create()
+                return RedirectToAction("Index", "Search");
+            }
+
+
+            return RedirectToAction("Index", "Login");
+        }
+        public IActionResult Logout()
         {
-            return View();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Login");
         }
 
-        // POST: Login/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] LoginViewModel loginViewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(loginViewModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(loginViewModel);
-        }
-
-        // GET: Login/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var loginViewModel = await _context.LoginViewModel.FindAsync(id);
-            if (loginViewModel == null)
-            {
-                return NotFound();
-            }
-            return View(loginViewModel);
-        }
-
-        // POST: Login/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] LoginViewModel loginViewModel)
-        {
-            if (id != loginViewModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(loginViewModel);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LoginViewModelExists(loginViewModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(loginViewModel);
-        }
-
-        // GET: Login/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var loginViewModel = await _context.LoginViewModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (loginViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(loginViewModel);
-        }
-
-        // POST: Login/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var loginViewModel = await _context.LoginViewModel.FindAsync(id);
-            if (loginViewModel != null)
-            {
-                _context.LoginViewModel.Remove(loginViewModel);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool LoginViewModelExists(int id)
-        {
-            return _context.LoginViewModel.Any(e => e.Id == id);
-        }
     }
 }

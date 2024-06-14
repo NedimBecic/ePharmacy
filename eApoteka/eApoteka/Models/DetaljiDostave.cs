@@ -20,5 +20,7 @@ namespace eApoteka.Models
         public int DostavljacId { get; set; }
         public Dostavljac Dostavljac { get; set; }
 
+        public int brojTelefona { get; set; }
+
     }
 }

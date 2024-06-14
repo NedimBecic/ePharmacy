@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\controllers\\orderdetailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\controllers\\orderdetailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\views\\orderdetails\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\views\\orderdetails\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\controllers\\placeordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\controllers\\placeordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\controllers\\showorderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\controllers\\showorderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\views\\pharmacistpanel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\views\\pharmacistpanel\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\views\\register\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\views\\register\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\views\\register\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\views\\register\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|c:\\users\\nedim\\onedrive\\desktop\\ooad\\tim3\\eapoteka\\eapoteka\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42A2D538-FCFB-4196-9B75-F4F9661AFE64}|eApoteka\\eApoteka.csproj|solutionrelative:eapoteka\\controllers\\registercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "eApoteka\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "eApoteka\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAADYAAAAAAAAAAAAAAD4AAAANAAAA",
+              "DocumentIndex": 1,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\OrderDetails\\Details.cshtml",
+              "RelativeDocumentMoniker": "eApoteka\\Views\\OrderDetails\\Details.cshtml",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\OrderDetails\\Details.cshtml",
+              "RelativeToolTip": "eApoteka\\Views\\OrderDetails\\Details.cshtml",
+              "ViewState": "AQIAAJkAAAAAAAAAAAAAAI0AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-05T15:57:14.674Z",
-              "IsPinned": true,
+              "WhenOpened": "2024-06-14T21:00:03.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderDetailsController.cs",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\OrderDetailsController.cs",
+              "RelativeDocumentMoniker": "eApoteka\\Controllers\\OrderDetailsController.cs",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\OrderDetailsController.cs",
+              "RelativeToolTip": "eApoteka\\Controllers\\OrderDetailsController.cs",
+              "ViewState": "AQIAAJIAAAAAAAAAAAAIwKoAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-14T20:53:18.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ShowOrdersController.cs",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\ShowOrdersController.cs",
+              "RelativeDocumentMoniker": "eApoteka\\Controllers\\ShowOrdersController.cs",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\ShowOrdersController.cs",
+              "RelativeToolTip": "eApoteka\\Controllers\\ShowOrdersController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAACQAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-14T20:53:00.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlaceOrderController.cs",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\PlaceOrderController.cs",
+              "RelativeDocumentMoniker": "eApoteka\\Controllers\\PlaceOrderController.cs",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\PlaceOrderController.cs",
+              "RelativeToolTip": "eApoteka\\Controllers\\PlaceOrderController.cs",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAwwGcAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-14T20:52:54.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\PharmacistPanel\\Index.cshtml",
+              "RelativeDocumentMoniker": "eApoteka\\Views\\PharmacistPanel\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\PharmacistPanel\\Index.cshtml",
+              "RelativeToolTip": "eApoteka\\Views\\PharmacistPanel\\Index.cshtml",
+              "ViewState": "AQIAAGYAAAAAAAAAAAAAAIIAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-14T20:44:23.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Register\\Create.cshtml",
+              "RelativeDocumentMoniker": "eApoteka\\Views\\Register\\Create.cshtml",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Register\\Create.cshtml",
+              "RelativeToolTip": "eApoteka\\Views\\Register\\Create.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-14T20:41:01.728Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Register\\Index.cshtml",
+              "RelativeDocumentMoniker": "eApoteka\\Views\\Register\\Index.cshtml",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Views\\Register\\Index.cshtml",
+              "RelativeToolTip": "eApoteka\\Views\\Register\\Index.cshtml",
+              "ViewState": "AQIAAKIAAAAAAAAAAAAAALkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-14T20:36:40.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RegisterController.cs",
+              "DocumentMoniker": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\RegisterController.cs",
+              "RelativeDocumentMoniker": "eApoteka\\Controllers\\RegisterController.cs",
+              "ToolTip": "C:\\Users\\nedim\\OneDrive\\Desktop\\OOAD\\Tim3\\eApoteka\\eApoteka\\Controllers\\RegisterController.cs",
+              "RelativeToolTip": "eApoteka\\Controllers\\RegisterController.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAiwDMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-14T20:17:29.185Z",
               "EditorCaption": ""
             }
           ]

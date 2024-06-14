@@ -1,157 +1,150 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eApoteka.Data;
+using eApoteka.Models;
 using eApoteka.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Stripe;
+using Stripe.Checkout;
+using System.Collections.Generic;
 
 namespace eApoteka.Controllers
 {
     public class PlaceOrderController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private const string OrderSessionKey = "CurrentOrder";
 
         public PlaceOrderController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: PlaceOrder
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
 
-        // GET: PlaceOrder/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var placeOrderViewModel = await _context.PlaceOrderViewModel
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (placeOrderViewModel == null)
-            {
-                return NotFound();
-            }
-
-            return View(placeOrderViewModel);
-        }
-
-        // GET: PlaceOrder/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PlaceOrder/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,PaymentMethod,DeliveryOptions,Street,Number,City,PostalCode,Email,Phone,Message")] PlaceOrderViewModel placeOrderViewModel)
+        public async Task<IActionResult> Index(PlaceOrderViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(placeOrderViewModel);
+            
+                var orderId = HttpContext.Session.GetInt32(OrderSessionKey);
+                if (orderId == null)
+                {
+                    return NotFound();
+                }
+
+                var narudzba = await _context.Narudzbe
+                    .Include(n => n.Stavke)
+                        .ThenInclude(s => s.Proizvod)
+                    .Include(n => n.DetaljDostave)
+                    .Include(n => n.DetaljPlacanja)
+                    .Include(n => n.StatusNarudzbe)
+                    .FirstOrDefaultAsync(n => n.Id == orderId.Value);
+
+                if (narudzba == null)
+                {
+                    return NotFound();
+                }
+
+                if (model.DeliveryOptions == "Delivery")
+                {
+                    narudzba.DetaljDostave.AdresaDostave = $"{model.Street} {model.Number}, {model.City}, {model.PostalCode}";
+                } else if(model.DeliveryOptions == "In-person")
+                {
+                    narudzba.DetaljDostave.AdresaDostave = "Delivery in-person.";
+                }
+                narudzba.DetaljDostave.NacinDostave = model.DeliveryOptions;
+                narudzba.DetaljDostave.brojTelefona = Int32.Parse(model.Phone);
+
+                narudzba.DetaljPlacanja.TipPlacanja = model.PaymentMethod;
+
+                narudzba.KorisnikId = (int)HttpContext.Session.GetInt32("UserId");
+                narudzba.Timestamp = DateTime.Now;
+                narudzba.StatusNarudzbe.TrenutniStatus = "Placed";
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(placeOrderViewModel);
-        }
 
-        // GET: PlaceOrder/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var placeOrderViewModel = await _context.PlaceOrderViewModel.FindAsync(id);
-            if (placeOrderViewModel == null)
-            {
-                return NotFound();
-            }
-            return View(placeOrderViewModel);
-        }
-
-        // POST: PlaceOrder/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,PaymentMethod,DeliveryOptions,Street,Number,City,PostalCode,Email,Phone,Message")] PlaceOrderViewModel placeOrderViewModel)
-        {
-            if (id != placeOrderViewModel.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (model.PaymentMethod == "Card")
                 {
-                    _context.Update(placeOrderViewModel);
+                    var lineItems = GetLineItemsForOrder(narudzba);
+
+                    if (!lineItems.Any())
+                    {
+                        return NotFound("No items found for the order.");
+                    }
+
+                    var options = new SessionCreateOptions
+                    {
+                        PaymentMethodTypes = new List<string>
+                        {
+                            "card",
+                        },
+                        LineItems = lineItems,
+                        Mode = "payment",
+                        SuccessUrl = Url.Action("ShowOrders", "PlaceOrder", new { id = narudzba.Id }, Request.Scheme),
+                        CancelUrl = Url.Action("Details", "PlaceOrder", null, Request.Scheme),
+                    };
+                    var service = new SessionService();
+                    Session session = service.Create(options);
+
+                    narudzba.StatusNarudzbe.TrenutniStatus = "Placeno"; 
+
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+
+                    return Json(new { url = session.Url });
+                } else
                 {
-                    if (!PlaceOrderViewModelExists(placeOrderViewModel.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                    narudzba.StatusNarudzbe.TrenutniStatus = "Placeno";
+                await _context.SaveChangesAsync();
             }
-            return View(placeOrderViewModel);
+
+                HttpContext.Session.Remove(OrderSessionKey);
+
+                return RedirectToAction("ShowOrders", new { id = narudzba.Id });
+            
+            return View(model);
         }
 
-        // GET: PlaceOrder/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        private List<SessionLineItemOptions> GetLineItemsForOrder(Narudzba narudzba)
+        {
+            return narudzba.Stavke.Select(stavka => new SessionLineItemOptions
+            {
+                PriceData = new SessionLineItemPriceDataOptions
+                {
+                    UnitAmount = (long)(stavka.Proizvod.Cijena * 100), 
+                    Currency = "usd",
+                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = stavka.Proizvod.Naziv,
+                    },
+                },
+                Quantity = stavka.Kolicina,
+            }).ToList();
+        }
+
+        public async Task<IActionResult> OrderSummary(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var placeOrderViewModel = await _context.PlaceOrderViewModel
+            var narudzba = await _context.Narudzbe
+                .Include(n => n.Stavke)
+                    .ThenInclude(s => s.Proizvod)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (placeOrderViewModel == null)
+            if (narudzba == null)
             {
                 return NotFound();
             }
 
-            return View(placeOrderViewModel);
-        }
-
-        // POST: PlaceOrder/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var placeOrderViewModel = await _context.PlaceOrderViewModel.FindAsync(id);
-            if (placeOrderViewModel != null)
-            {
-                _context.PlaceOrderViewModel.Remove(placeOrderViewModel);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool PlaceOrderViewModelExists(int id)
-        {
-            return _context.PlaceOrderViewModel.Any(e => e.Id == id);
+            return View(narudzba);
         }
     }
 }
