@@ -1,6 +1,6 @@
 # eApoteka
 
-eApoteka is an online pharmacy application that allows users to place orders for pharmaceutical products. The application provides an admin panel to manage users, pharmacists, and delivery persons. It also includes functionality for logging in, placing orders, and viewing order details.
+eApoteka is an online pharmacy application that allows users to place orders for pharmaceutical products. It was developed as a part of Object Oriented Analysis and Desgin Course. The application provides an admin panel to manage users, pharmacists, and delivery persons. It also includes functionality for logging in, placing orders, and viewing order details. 
 
 ## Features
 
